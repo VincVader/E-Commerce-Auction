@@ -1,0 +1,41 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+{% if not bruh %}
+<h1 class="text-center display-1 text-danger">No listings with such category was found</h1>
+{% else %}
+<h1 class="text-center display-1 mb-4">Category: {{bruh.1.category}}</h1>
+{% endif %}
+
+{% for item in bruh %}
+
+<div class="row border-top m-0">
+
+  <div class="col-md-4 col-12 p-0">
+    <a href="{% url 'listings' list_id=item.id %}" class="nav-link stretched-link"><img src="{{item.image.url}}"
+        class="img-fluid" alt="Porsche 911">
+    </a>
+  </div>
+  <div class="col-md-8 col-12 p-0">
+    <a href="{% url 'listings' list_id=item.id %}" class="nav-link stretched-link p-0">
+      <ul class="list-group list-group-flush border-left">
+        <li class="list-group-item text-dark"><strong>Title:</strong> {{item.title}}
+          {% if item.in_watch_list %}
+          <span class="badge badge-primary badge-pill ml-1">In Watchlist</span>
+          {% else %}
+          <span class="badge badge-secondary badge-pill ml-1">Not In Watchlist</span>
+          {% endif %}
+        </li>
+        <li class="list-group-item text-dark"><strong>Description:</strong> {{item.description}}</li>
+        <li class="list-group-item text-dark"><strong>Price:</strong> ${{item.start_bid}}</li>
+        <li class="list-group-item text-dark"><strong>Categories:</strong> {{item.category}}</li>
+        <li class="list-group-item text-dark"><strong>Created:</strong> {{item.date_posted}}</li>
+        <li class="list-group-item text-dark"><strong>Author:</strong> {{item.user}}</li>
+      </ul>
+    </a>
+  </div>
+</div>
+
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends "auctions/layout.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+
+<div class="row mx-3">
+  <div class="col-12 p-0">
+    <h1 class="text-center display-3">Listing</h1>
+    <h1 class="text-center">{{item.title}}
+      {% if user.is_authenticated %}
+
+      {% if in_watch_list %}
+      <span class="badge badge-primary badge-pill ml-3">In Watchlist</span>
+      {% if not item.active %}
+      <span class="badge badge-success badge-pill ml-3">Closed</span>
+      {%endif%}
+      {% elif not item.active  %}
+      <span class="badge badge-success badge-pill ml-3">Closed</span>
+      {% else %}
+      <span class="badge badge-secondary badge-pill ml-3">Not In Watchlist</span>
+      {% endif %}
+      {% endif %}
+      
+    </h1>
+    {% if user.is_authenticated %}
+    {% if in_watch_list or item.active %}
+    <form action="{% url 'watchlistbtn' %}" class="text-center" method="POST">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-info">
+        {% if in_watch_list %}
+        Remove from Watchlist
+        {% else %}
+        Add to watchlist
+        {% endif %}
+      </button>
+      <input type="hidden" name="watchlist_listing" value={{item.pk}}>
+    </form>
+    {% endif %}
+    {% endif %}
+    <img src="{{item.image.url}}" class="mx-auto d-block" alt="{{item.title}}">
+    <p class=""><strong>Description:</strong> {{item.description}}</p>
+    <p><strong>Bid:</strong>
+
+      ${{auction.current_bid}}
+
+    </p>
+    <p>
+      {{auction.number_of_bids}} Bid(s) right now </br>
+      {%if user != auction.current_leader %}
+       <strong class="text-primary"> {{auction.current_leader}}</strong> is leading 
+       {% else %}
+       <strong class="text-primary">You</strong> are leading
+       {%endif%}
+      {% if not user.is_authenticated  %}
+      <br>To be able to place a bid sign in
+      {% elif user != item.user %}
+      <form action="{% url 'newbid' list_id=item.pk %}" method="POST">
+        <div class="row ">
+          <div class="col-3">
+            {% csrf_token %}
+            {{form|crispy}}
+          </div>
+          <div class="col-1 mb-2 p-1 d-flex align-items-end" style="font-size: 34px;">$
+          </div>
+          {% if messages %}
+          <div class="col-3 messages align-self-center mb-0 ">
+            {% for message in messages %}
+            {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+            <p {% if message.tags %} class="{{ message.tags }} p-2 mb-0 mt-3 bg-danger rounded text-light text-center"
+              {% endif %}>
+              {{ message }} ${{auction.current_bid}}
+
+            </p>
+            {% endif %}
+            {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+            <p {% if message.tags %} class="{{ message.tags }} p-2 mb-0 mt-3 bg-success rounded text-light text-center"
+              {% endif %}>
+              {{ message }} ${{auction.current_bid}}
+            </p>
+
+            {% endif %}
+            {% endfor %}
+          </div>
+          {% endif %}
+
+        </div>
+        <button type="submit" class="btn btn-primary ">Bid</button>
+      </form>
+      {% else %}
+      <form action="{% url 'close_auction' list_id=item.pk %}">
+        <div class="row ">
+          <div class="col-2">
+            <button class="btn btn-success" type="submit">Close auction</button>
+          </div>
+          {% if messages %}
+          <div class="col-3 messages align-self-center mb-0 ">
+            {% for message in messages %}
+            {% if message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+            <p {% if message.tags %} class="{{ message.tags }} p-1 m-0 bg-success rounded text-light text-center"
+              {% endif %}>
+              {{ message }}
+            </p>
+            {% endif %}
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+      </form>
+      {% endif %}
+
+    </p>
+
+    <p><strong>Categories:</strong> {{item.category}}</p>
+    <p><strong>Created:</strong> {{item.date_posted}}</p>
+    <p><strong>Author:</strong> {{item.user}}</p>
+  </div>
+</div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+{% if not bruh %}
+<h1 class="text-center display-1">Your Watchlist is empty</h1>
+{%else%}
+<h1 class="text-center display-1"> Watchlist</h1>
+{% for item in bruh %}
+<div class="row border-top">
+
+  <div class="col-md-4 col-12 p-0">
+    <a href="{% url 'listings' list_id=item.id %}" class="nav-link stretched-link"><img src="{{item.image.url}}" class="img-fluid" alt="Porsche 911">
+    </a>
+  </div>
+  <div class="col-md-8 col-12 p-0">
+    <a href="{% url 'listings' list_id=item.id %}" class="nav-link stretched-link p-0">
+    <ul class="list-group list-group-flush border-left">
+        <li class="list-group-item text-dark"><strong>Title:</strong> {{item.title}}</li>
+        <li class="list-group-item text-dark"><strong>Description:</strong> {{item.description}}</li>
+        <li class="list-group-item text-dark"><strong>Initital Price:</strong> ${{item.start_bid}}</li>
+        <li class="list-group-item text-dark"><strong>Categories:</strong> {{item.category}}</li>
+        <li class="list-group-item text-dark"><strong>Created:</strong> {{item.date_posted}}</li>
+        <li class="list-group-item text-dark"><strong>Author:</strong> {{item.user}}</li>
+      </ul>
+    </a>
+  </div>
+</div>
+
+{% endfor %}
+{%endif%}
+
+
+{% endblock %}
