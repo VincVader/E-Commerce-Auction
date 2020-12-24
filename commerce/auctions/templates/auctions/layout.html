@@ -14,30 +14,22 @@
 </head>
 
 <body>
-    <div class="container-fluid p-0 mb-5">
-        <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid p-0 mb-5 justify-content-end">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light ">
             <a class="navbar-brand" href="{% url 'index' %}">Active Listings</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse order-1 dual-collapse-2" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <div class="nav-link active">
-                            {% if user.is_authenticated %}
-                            Signed in as <strong class="text-primary">{{ user.username }}</strong>.
-                            {% else %}
-                            Not signed in.
-                            {% endif %}
-                        </div>
-                    </li>
                     {% if user.is_authenticated %}
-                    <li class="nav-item">
+
+                    <li class="nav-item mx-auto">
                         <a class="nav-link" href="{% url 'categories' %}">Categories</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item mx-auto">
                         <a class="nav-link" href="{% url 'watchlist_items' %}">Watchlist
                             {% if watchlist_items == 0 %}
                             <span class="badge badge-secondary badge-pill">{{watchlist_items}}</span>
@@ -46,20 +38,36 @@
                             {% endif %}
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item mx-auto">
                         <a class="nav-link" href="{% url 'create_listing' %}">Create Listing</a>
                     </li>
+                    
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="collapse navbar-collapse order-2 dual-collapse-2" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item mx-auto">
+                        <div class="nav-link active">
+                            Signed in as <strong class="text-primary">{{ user.username }}</strong>.
+                        </div>
+                    </li>
 
-                    <li class="nav-item">
+                    <li class="nav-item mx-auto">
                         <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
                     </li>
                     {% else %}
-                    <li class="nav-item">
+                    <li class="nav-item mx-auto">
+                        <p class="nav-link mb-0">Not signed in.</p>
+                    </li>
+                    <li class="nav-item mx-auto">
                         <a class="nav-link" href="{% url 'login' %}">Log In</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item mx-auto">
                         <a class="nav-link" href="{% url 'register' %}">Register</a>
                     </li>
+
                     {% endif %}
                 </ul>
             </div>

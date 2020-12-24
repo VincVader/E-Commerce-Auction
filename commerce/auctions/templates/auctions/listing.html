@@ -2,8 +2,8 @@
 {% load crispy_forms_tags %}
 {% block body %}
 
-<div class="row mx-3">
-  <div class="col-12 p-0">
+<div class="row justify-content-center mx-3">
+  <div class="col-8 p-0">
     <h1 class="text-center display-3">Listing</h1>
     <h1 class="text-center">{{item.title}}
       {% if user.is_authenticated %}
@@ -44,11 +44,13 @@
 
     </p>
     {% if not item.active %}
-      {% if auction.current_leader == user %}
-      <div class="bg-success text-center text-light p-5 m-5">Auction is closed. <strong class="text-primary">You</strong> are the winner. Congratulations!</div>
-      {%else%}
-      <div class="bg-secondary text-center text-light p-5 m-5">Auction is closed. The winner is <strong class="text-primary"> {{auction.current_leader}}</strong></div>
-      {%endif%}
+    {% if auction.current_leader == user %}
+    <div class="bg-success text-center text-light p-5 m-5">Auction is closed. <strong class="text-primary">You</strong>
+      are the winner. Congratulations!</div>
+    {%else%}
+    <div class="bg-secondary text-center text-light p-5 m-5">Auction is closed. The winner is <strong
+        class="text-primary"> {{auction.current_leader}}</strong></div>
+    {%endif%}
     {% else %}
     <p>
       {{auction.number_of_bids}} Bid{% if auction.number_of_bids != 1%}'s{%endif%} right now </br>
@@ -121,6 +123,39 @@
     <p><strong>Categories:</strong> {{item.category}}</p>
     <p><strong>Created:</strong> {{item.date_posted}}</p>
     <p><strong>Author:</strong> {{item.user}}</p>
+
+
+    <div class="text-center display-3">Comments</div>
+    <div class="container m-0 ">
+      {% for comment in comments %}
+      <div class="row m-2 justify-content-center">
+        <div class="col-1 border border-dark border-bottom-0 border-right-0 bg-secondary text-light">
+          <span class="{%if comment.user_id == item.user %}text-danger{%elif comment.user_id == user %}text-success{%else%}text-primary{%endif%}">
+          {{comment.user_id}}
+          </span>
+        </div>
+        <div class="col-9 border border-dark border-bottom-0 border-left-0 bg-secondary text-light"></div>
+        <div class="w-100"></div>
+        <div class="col-3 border border-dark border-top-0 border-bottom-0 border-right-0 bg-secondary text-light">
+          at {{comment.message_time}}
+        </div>
+        <div class="col-7 border border-dark border-bottom-0 border-left-0 border-top-0 bg-secondary text-light"></div>
+        <div class="w-100"></div>
+        <div class="col-10 border border-dark bg-secondary text-light">
+          {{comment.message}}
+        </div>
+      </div>
+      {% endfor %}
+      {% if user.is_authenticated %}
+      <div class="text-center mt-5">
+        <form action="{% url 'comment' list_id=item.pk %}" method="POST">
+          {% csrf_token %}
+          {{addcomment}}
+          <button class="btn btn-success" type="submit">Add comment</button>
+        </form>
+      </div>
+      {%endif%}
+    </div>
   </div>
 </div>
 

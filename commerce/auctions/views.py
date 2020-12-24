@@ -3,8 +3,8 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
-from .forms import NewBid, NewListing
-from .models import User, Listing, Bid, Comment, Auction, Watchlist
+from .forms import NewBid, NewListing, NewComment
+from .models import User, Listing, Bid, Comment, Auction, Watchlist, Comment
 from django.contrib.auth.decorators import login_required
 from django.db.models import Max
 from django.contrib import messages
@@ -155,10 +155,10 @@ def watchlist_items(request):
 def listings(request, list_id):
     listing = Listing.objects.get(id=list_id)
     listing.category = listing.get_category_display()
-
-    form = NewBid(request.POST)
+    addcomment = NewComment()
+    form = NewBid()
     in_watch_list = False
-
+    comments = Comment.objects.filter(listing_id=list_id)
     try:
         auction = Auction.objects.get(listing_id=list_id)
         number_of_bids = auction.number_of_bids
@@ -180,6 +180,8 @@ def listings(request, list_id):
 
     return render(request, "auctions/listing.html",{
         "item": listing,
+        "addcomment": addcomment,
+        "comments": comments,
         "form": form,
         "auction": auction,
         "watchlist_items": watchlist_items,
@@ -263,10 +265,20 @@ def close_auction(request, list_id):
 
     messages.warning(request, 'Successfully closed auction.')
     
-    print(bid)
-    print(auction)
+    
 
 
     return HttpResponseRedirect(reverse("listings", kwargs={'list_id':list_id})) 
 
+@login_required
+def comment(request, list_id):
+    form = NewComment(request.POST)
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.user_id = request.user
+        comment.listing_id = Auction.objects.get(listing_id=list_id)
+        comment.save()
+        return HttpResponseRedirect(reverse("listings", kwargs={'list_id':list_id})) 
 
+    else:
+        return HttpResponseRedirect(reverse("listings", kwargs={'list_id':list_id})) 

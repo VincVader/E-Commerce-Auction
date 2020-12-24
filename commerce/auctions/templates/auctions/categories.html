@@ -3,11 +3,11 @@
 {% block body %}
 <h1 class="text-center display-1"> Categories</h1>
 <div class="container">
-  <div class="row bg-danger">
+  <div class="row ">
     {% for cat in categories %}
 
-    <div class="col-4 text-center bg-light text-dark border border-dark">
-      <a href="{% url 'category' cat=cat.0 %}" class="stretched-link">
+    <div class="col-4 text-center ">
+      <a href="{% url 'category' cat=cat.0 %}" class="stretched-link nav-link">
       {{cat.1}}
       </a>
     </div>
