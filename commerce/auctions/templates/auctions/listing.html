@@ -19,7 +19,7 @@
       <span class="badge badge-secondary badge-pill ml-3">Not In Watchlist</span>
       {% endif %}
       {% endif %}
-      
+
     </h1>
     {% if user.is_authenticated %}
     {% if in_watch_list or item.active %}
@@ -43,13 +43,22 @@
       ${{auction.current_bid}}
 
     </p>
+    {% if not item.active %}
+      {% if auction.current_leader == user %}
+      <div class="bg-success text-center text-light p-5 m-5">Auction is closed. <strong class="text-primary">You</strong> are the winner. Congratulations!</div>
+      {%else%}
+      <div class="bg-secondary text-center text-light p-5 m-5">Auction is closed. The winner is <strong class="text-primary"> {{auction.current_leader}}</strong></div>
+      {%endif%}
+    {% else %}
     <p>
-      {{auction.number_of_bids}} Bid(s) right now </br>
-      {%if user != auction.current_leader %}
-       <strong class="text-primary"> {{auction.current_leader}}</strong> is leading 
-       {% else %}
-       <strong class="text-primary">You</strong> are leading
-       {%endif%}
+      {{auction.number_of_bids}} Bid{% if auction.number_of_bids != 1%}'s{%endif%} right now </br>
+      {%if user != auction.current_leader and auction.number_of_bids != 0 %}
+      <strong class="text-primary"> {{auction.current_leader}}</strong> is leading
+      {% else %}
+      {% if auction.current_leader != item.user %}
+      <strong class="text-primary">You</strong> are leading
+      {% endif %}
+      {%endif%}
       {% if not user.is_authenticated  %}
       <br>To be able to place a bid sign in
       {% elif user != item.user %}
@@ -108,7 +117,7 @@
       {% endif %}
 
     </p>
-
+    {% endif %}
     <p><strong>Categories:</strong> {{item.category}}</p>
     <p><strong>Created:</strong> {{item.date_posted}}</p>
     <p><strong>Author:</strong> {{item.user}}</p>
