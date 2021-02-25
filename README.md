@@ -25,15 +25,17 @@ Site allows users to **post auction** listings, **place bids** on listing, **com
 
 [My contacts](#my-contacts)
 
-## 1. Header:
+## 1. Active Listings:
 
-### 1.1 Subheader:
+On a homepage the user can see 
+![active listings](/readmedia/active-listings.gif)
+### 1.1 Listng page:
 
-image description
+Clicking on a listing will take user to a page specific to that listing:
 
-![alt text](/readmedia/default.png)
+![alt text](/readmedia/listing-page-example.gif)
 
-### 1.2 Subheader:
+### 1.2 Create listing:
 
 image description
 
@@ -45,7 +47,7 @@ image description
 
 ![alt text](/readmedia/default.png)
 
-## 2. Header:
+## 2. Listing page:
 
 ### 2.1 Subheader:
 
@@ -53,17 +55,17 @@ image description
 
 ![alt text](/readmedia/default.png)
 
-### 2.2 Subheader:
+### 2.2 Watchlist:
 
 image description
 
-![alt text](/readmedia/default.png)
+![alt text](/readmedia/add-to-watchlist.gif)
 
-## 3. Header:
+## 3. Listing creation:
 
 image description
 
-![alt text](/readmedia/default.png)
+![listing creation](/readmedia/listing-creation.gif)
 
 ## 4. Header:
 
