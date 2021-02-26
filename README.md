@@ -1,89 +1,113 @@
 # E-Commerce auction
 
 Site allows users to **post auction** listings, **place bids** on listing, **comment** listings, and **add** listings to a "watchlist"
+
 ### Written with:
 
 - HTML
-- CSS
+- CSS (bootstrap 4.5.3)
 - Python 3.9
-- Django 3.0.2
+- Django 3.0.2 
+   * CrispyForms
 - SQLite 3
-- django-markdown2
+
 ### Readme Navigation
 
-1. [Name](#1-header)
-   - [subname](#11-subheader)
-   - [subname](#12-subheader)
-   - [subname](#13-subheader)
-2. [Name](#2-header)
-   - [subname](#21-subheader)
-   - [subname](#22-subheader)
-3. [Name](#3-header)
-4. [Name](#4-header)
-5. [Name](#5-header)
-6. [Future improvements](#6-future-improvements)
+1. [Homepage](#1-header)
+2. [Listing page](#2-listing-page)
+   2.1 [Listing](#21-listing)
+   2.2 [Create Listing](#22-create-listing)
+   2.3 [Watchlist](#23-watchlist)
+   2.4 [Comments](#24-comments)
+3. [Auction](#3-auction)
+   3.1 [Place bid](#31-place-bid)
+   3.2 [Close auciton](#32-close-auction)
+4. [Categories](#4-categories)
+5. [Future improvements](#5-future-improvements)
 
 [My contacts](#my-contacts)
 
-## 1. Active Listings:
+## 1. Homepage:
 
-On a homepage the user can see 
+On a homepage the user can see
 ![active listings](/readmedia/active-listings.gif)
-### 1.1 Listng page:
-
-Clicking on a listing will take user to a page specific to that listing:
-
-![alt text](/readmedia/listing-page-example.gif)
-
-### 1.2 Create listing:
-
-image description
-
-![alt text](/readmedia/default.png)
-
-### 1.3 Subheader:
-
-image description
-
-![alt text](/readmedia/default.png)
 
 ## 2. Listing page:
 
-### 2.1 Subheader:
+Clicking on a listing will take user to a page specific to that listing:
 
-image description
+### 2.1 Listing:
 
-![alt text](/readmedia/default.png)
+On that page user can see all the details about listing, such as:
+_Title_, _Description_, _Current Price_, _Category_(if provided), _Image_ (if provided), _Date_ when listing was published, and the _User_ that created this listing.
 
-### 2.2 Watchlist:
+![example of the listing page](/readmedia/listing-page-example.gif)
 
-image description
+### 2.2 Create listing:
 
-![alt text](/readmedia/add-to-watchlist.gif)
+User can click on _**Create Listing**_ link in the navbar, doing so he will be taken to page where he can create a new listing necessarily providing: _Title_, _Description_, _Starting Price_.
 
-## 3. Listing creation:
+and not necessarily providing: _Image_ and _Category_.
 
-image description
+![create listing](/readmedia/listing-creation.gif)
 
-![listing creation](/readmedia/listing-creation.gif)
+### 2.3 Watchlist:
 
-## 4. Header:
+User can add/remove any listing to/from the watchlist:
 
-image description
+![add to watchlist](/readmedia/add-to-watchlist.gif)
 
-![alt text](/readmedia/default.png)
+User can click on _**Watchlist**_ link in the navbar, doing so he will be taken to page where he can browse all the listing he added to watchlist.
 
-## 5. Header:
+![watchlist example](/readmedia/watchlist-example.gif)
 
-image description
+### 2.4 Comments:
 
-![alt text](/readmedia/default.png)
+On a listing page authenticated user can leave out a comment.
+Commentators usernames vary in colors:
+* Red - User, who posted listing.
+* Green - Your own comments.
+* Blue - Other users.
 
-## 6. Future improvements:
+![comments](/readmedia/comments.png)
 
-1. Feature 1
-2. Feature 2
-3. Feature 3
+
+## 3. Auction:
+
+### 3.1 Place bid:
+
+User can place bids on any listing, other than the one he posted himself.
+
+![normal bid](/readmedia/normal-bid.gif)
+
+User also unable to place bids smaller than the price of previous bid.
+
+![lesser bid](/readmedia/small-bid.gif)
+
+### 3.2 Close auction:
+
+User who posted a listing can close an auction at any time.
+*Closed auction is not displayed on the homepage.*
+
+
+![auction closing](/readmedia/auction-closing.gif)
+
+And the winner will see  shown and congratulated.
+
+![winner of the auction](/readmedia/auction-winner.gif)
+
+## 4. Categories:
+
+User can click on _**Categories**_ link in the navbar, choose a category and view listing only by that category.
+
+![categories](/readmedia/categories.gif)
+
+## 5. Future improvements:
+
+1. Switch from bootstap to css
+2. Change ui to more responsible
+3. Add ability to view closed auction.
+
 
 ## My contacts
 

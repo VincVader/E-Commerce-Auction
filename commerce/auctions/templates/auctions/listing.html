@@ -129,19 +129,19 @@
     <div class="container m-0 ">
       {% for comment in comments %}
       <div class="row m-2 justify-content-center">
-        <div class="col-1 border border-dark border-bottom-0 border-right-0 bg-secondary text-light">
+        <div class="col-6 border border-dark border-bottom-0 border-right-0  ">
           <span class="{%if comment.user_id == item.user %}text-danger{%elif comment.user_id == user %}text-success{%else%}text-primary{%endif%}">
           {{comment.user_id}}
           </span>
         </div>
-        <div class="col-9 border border-dark border-bottom-0 border-left-0 bg-secondary text-light"></div>
+        <div class="col-4 border border-dark border-bottom-0 border-left-0  "></div>
         <div class="w-100"></div>
-        <div class="col-3 border border-dark border-top-0 border-bottom-0 border-right-0 bg-secondary text-light">
+        <div class="col-5 border border-dark border-top-0 border-bottom-0 border-right-0  ">
           at {{comment.message_time}}
         </div>
-        <div class="col-7 border border-dark border-bottom-0 border-left-0 border-top-0 bg-secondary text-light"></div>
+        <div class="col-5 border border-dark border-bottom-0 border-left-0 border-top-0  "></div>
         <div class="w-100"></div>
-        <div class="col-10 border border-dark bg-secondary text-light">
+        <div class="col-10 border border-dark  ">
           {{comment.message}}
         </div>
       </div>
