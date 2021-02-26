@@ -94,7 +94,7 @@ User who posted a listing can close an auction at any time.
 
 And the winner will see  shown and congratulated.
 
-![winner of the auction](/readmedia/auction-winner.gif)
+![winner of the auction](/readmedia/auction-winner.png)
 
 ## 4. Categories:
 
