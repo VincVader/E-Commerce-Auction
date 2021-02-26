@@ -59,7 +59,7 @@ User can add/remove any listing to/from the watchlist:
 
 User can click on _**Watchlist**_ link in the navbar, doing so he will be taken to page where he can browse all the listing he added to watchlist.
 
-![watchlist example](/readmedia/watchlist-example.gif)
+![watchlist example](/readmedia/watchlist.gif)
 
 ### 2.4 Comments:
 
